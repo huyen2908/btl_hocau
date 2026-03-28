@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Hệ thống quản lý hồ câu (Flask + SQLite)
 
 Cài đặt (PowerShell):
@@ -16,3 +17,6 @@ Tài khoản mặc định:
 
 Ghi chú: templates tiếng Việt, GUI cơ bản dùng Bootstrap.
 
+=======
+# btl_hocau
+>>>>>>> bb8cea4d35b24562ddcef8f887891e83250be3d6
