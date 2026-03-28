@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Người dùng{% endblock %}
+{% block content %}
+  <h2>Người dùng</h2>
+  <table class="table">
+    <thead><tr><th>#</th><th>Tên đăng nhập</th><th>Email</th><th>Vai trò</th><th>Hành động</th></tr></thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.role }}</td>
+        <td>
+          <a href="{{ url_for('admin.admin_user_edit', uid=u.id) }}" class="btn btn-sm btn-primary">Sửa</a>
+          <form method="post" action="{{ url_for('admin.admin_user_delete', uid=u.id) }}" style="display:inline" onsubmit="return confirm('Xác nhận xóa?')">
+            <button class="btn btn-sm btn-danger">Xóa</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

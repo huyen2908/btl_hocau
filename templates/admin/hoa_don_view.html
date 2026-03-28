@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Hoá đơn #{{ inv.id }}{% endblock %}
+{% block content %}
+  <h2>Hoá đơn #{{ inv.id }}</h2>
+  <p>Người dùng: {{ inv.user.username if inv.user else 'N/A' }}</p>
+  <p>Tổng: {{ inv.total }}</p>
+  <p>Giảm: {{ inv.discount }}</p>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">{{ form.payment_method.label }} {{ form.payment_method(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.status.label }} {{ form.status(class_='form-control') }}</div>
+    {{ form.submit(class_='btn btn-primary') }}
+  </form>
+{% endblock %}

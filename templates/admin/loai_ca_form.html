@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Loại cá - Form{% endblock %}
+{% block content %}
+  <h2>{% if fish %}Chỉnh sửa{% else %}Tạo mới{% endif %} loại cá</h2>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.name.label }}
+      {{ form.name(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+      {{ form.description.label }}
+      {{ form.description(class_='form-control') }}
+    </div>
+    <div class="mb-3">
+      {{ form.price.label }}
+      {{ form.price(class_='form-control') }}
+    </div>
+    <button class="btn btn-primary">Lưu</button>
+  </form>
+{% endblock %}
+

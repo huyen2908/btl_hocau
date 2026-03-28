@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Tạo hoạt động{% endblock %}
+{% block content %}
+  <h2>Tạo hoạt động từ đặt chỗ</h2>
+  <form method="post">
+    <div class="mb-3">
+      <label>Chọn đặt chỗ</label>
+      <select name="dat_cho_id" class="form-control">
+        {% for b in bookings %}
+        <option value="{{ b.id }}">#{{ b.id }} - {{ b.user.username }} - {{ b.ho_cau.name }} - {{ b.date }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn btn-primary">Tạo</button>
+  </form>
+{% endblock %}

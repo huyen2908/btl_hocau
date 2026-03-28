@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Hoá đơn #{{ inv.id }}{% endblock %}
+{% block content %}
+  <h2>Hoá đơn #{{ inv.id }}</h2>
+  <div>Tổng: {{ inv.total }}</div>
+  <div>Trạng thái: {{ inv.status }}</div>
+  <div>Ngày: {{ inv.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+  <div>Đặt chỗ: {{ inv.booking.id if inv.booking else 'N/A' }}</div>
+{% endblock %}
+

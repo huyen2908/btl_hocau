@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Sửa người dùng{% endblock %}
+{% block content %}
+  <h2>Sửa người dùng</h2>
+  <form method="post">
+    <div class="mb-3">
+      <label>Tên đăng nhập</label>
+      <input class="form-control" value="{{ user.username }}" disabled />
+    </div>
+    <div class="mb-3">
+      <label>Email</label>
+      <input name="email" class="form-control" value="{{ user.email or '' }}" />
+    </div>
+    <div class="mb-3">
+      <label>Họ tên</label>
+      <input name="full_name" class="form-control" value="{{ user.full_name or '' }}" />
+    </div>
+    <div class="mb-3">
+      <label>Vai trò</label>
+      <select name="role" class="form-select">
+        <option value="customer" {% if user.role=='customer' %}selected{% endif %}>Khách</option>
+        <option value="staff" {% if user.role=='staff' %}selected{% endif %}>Nhân viên</option>
+        <option value="admin" {% if user.role=='admin' %}selected{% endif %}>Quản trị</option>
+      </select>
+    </div>
+    <button class="btn btn-primary">Lưu</button>
+  </form>
+{% endblock %}
+

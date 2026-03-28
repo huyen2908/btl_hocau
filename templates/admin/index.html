@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+  <h2>Quản trị</h2>
+  <a class="btn btn-primary" href="{{ url_for('admin.ho_cau_new') }}">Thêm hồ câu mới</a>
+  <a class="btn btn-secondary" href="{{ url_for('admin.admin_users_list') }}">Người dùng</a>
+  <a class="btn btn-secondary" href="{{ url_for('admin.loai_ca_list') }}">Loại cá</a>
+  <h3 class="mt-3">Danh sách hồ</h3>
+  <table class="table">
+    <thead><tr><th>#</th><th>Tên</th><th>Địa chỉ</th></tr></thead>
+    <tbody>
+      {% for p in ponds %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.address }}</td>
+          <td>
+              <a class="btn btn-sm btn-primary" href="{{ url_for('admin.ho_cau_edit', pid=p.id) }}">Sửa</a>
+              <a class="btn btn-sm btn-info" href="{{ url_for('admin.admin_ho_cau_fish', pid=p.id) }}">Quản lý loại cá</a>
+              <form method="post" action="{{ url_for('admin.ho_cau_delete', pid=p.id) }}" style="display:inline" onsubmit="return confirm('Xác nhận xóa?')">
+                <button class="btn btn-sm btn-danger">Xóa</button>
+              </form>
+            </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Danh sách hồ câu{% endblock %}
+{% block content %}
+  <h2>Danh sách hồ câu</h2>
+  <form method="get" class="mb-3">
+    <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Tìm theo tên...">
+  </form>
+  <table class="table">
+    <thead><tr><th>#</th><th>Tên</th><th>Địa chỉ</th><th></th></tr></thead>
+    <tbody>
+      {% for p in ponds %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.address }}</td>
+        <td><a href="{{ url_for('main.ho_cau_detail', pond_id=p.id) }}" class="btn btn-sm btn-primary">Chi tiết</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Hoá đơn của tôi{% endblock %}
+{% block content %}
+  <h2>Hoá đơn của tôi</h2>
+  <table class="table">
+    <thead><tr><th>#</th><th>Tổng</th><th>Trạng thái</th><th>Ngày</th><th>Hành động</th></tr></thead>
+    <tbody>
+      {% for inv in invoices %}
+      <tr>
+        <td>{{ inv.id }}</td>
+        <td>{{ inv.total }}</td>
+        <td>{{ inv.status }}</td>
+        <td>{{ inv.created_at.strftime('%Y-%m-%d') }}</td>
+        <td><a class="btn btn-sm btn-primary" href="{{ url_for('main.my_invoice_view', iid=inv.id) }}">Xem</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

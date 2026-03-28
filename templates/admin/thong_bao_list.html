@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Thông báo{% endblock %}
+{% block content %}
+  <h2>Thông báo</h2>
+  <form method="post" class="mb-3">
+    <div class="mb-2"><input class="form-control" name="title" placeholder="Tiêu đề"></div>
+    <div class="mb-2"><textarea class="form-control" name="message" placeholder="Nội dung"></textarea></div>
+    <button class="btn btn-primary">Gửi thông báo</button>
+  </form>
+  <ul class="list-group">
+    {% for n in notices %}
+    <li class="list-group-item">{{ n.title }} - {{ n.created_at.strftime('%Y-%m-%d') }}<br>{{ n.message }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

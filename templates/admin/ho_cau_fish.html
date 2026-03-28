@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Quản lý loại cá cho hồ{% endblock %}
+{% block content %}
+  <h2>Quản lý loại cá cho hồ: {{ pond.name }}</h2>
+  <form method="post">
+    <table class="table">
+      <thead><tr><th>Loại cá</th><th>Số lượng</th><th>Hành động</th></tr></thead>
+      <tbody>
+        {% for f in fishes %}
+        <tr>
+          <td>{{ f.name }}</td>
+          <td>
+            <input type="number" name="qty_{{ f.id }}" value="{{ links.get(f.id).quantity if links.get(f.id) else 0 }}" class="form-control" />
+          </td>
+          <td>
+            {% if links.get(f.id) %}
+            <form method="post" action="{{ url_for('admin.admin_ho_cau_fish_delete', pid=pond.id, link_id=links.get(f.id).id) }}" style="display:inline">
+              <button class="btn btn-sm btn-danger">Xóa liên kết</button>
+            </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button class="btn btn-primary">Lưu</button>
+  </form>
+{% endblock %}
+

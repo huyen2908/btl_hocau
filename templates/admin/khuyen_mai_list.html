@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Khuyến mãi{% endblock %}
+{% block content %}
+  <h2>Khuyến mãi</h2>
+  <a class="btn btn-primary mb-3" href="{{ url_for('admin.khuyen_mai_new') }}">Tạo mới</a>
+  <table class="table">
+    <thead><tr><th>#</th><th>Mã</th><th>Tiêu đề</th><th>%</th><th>Trạng thái</th></tr></thead>
+    <tbody>
+      {% for k in promos %}
+      <tr>
+        <td>{{ k.id }}</td>
+        <td>{{ k.code }}</td>
+        <td>{{ k.title }}</td>
+        <td>{{ k.percent }}</td>
+        <td>{{ 'Hoạt động' if k.active else 'Không' }}</td>
+        <td>
+          <a class="btn btn-sm btn-primary" href="{{ url_for('admin.khuyen_mai_edit', kid=k.id) }}">Sửa</a>
+          <form method="post" action="{{ url_for('admin.khuyen_mai_delete', kid=k.id) }}" style="display:inline" onsubmit="return confirm('Xác nhận xóa?')">
+            <button class="btn btn-sm btn-danger">Xóa</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

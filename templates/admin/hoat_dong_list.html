@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Hoạt động{% endblock %}
+{% block content %}
+  <h2>Hoạt động</h2>
+  <a class="btn btn-primary mb-3" href="{{ url_for('admin.admin_hoat_dong_new') }}">Tạo từ đặt chỗ</a>
+  <table class="table">
+    <thead><tr><th>#</th><th>Hồ</th><th>Người dùng</th><th>Thời gian</th><th>Trạng thái</th></tr></thead>
+    <tbody>
+      {% for a in activities %}
+      <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.ho_cau.name if a.ho_cau else 'N/A' }}</td>
+        <td>{{ a.user.username if a.user else 'N/A' }}</td>
+        <td>{{ a.start_time }} - {{ a.end_time }}</td>
+        <td>{{ a.status }}</td>
+        <td>
+          <form method="post" action="{{ url_for('admin.hoat_dong_checkin', aid=a.id) }}" style="display:inline">
+            <button class="btn btn-sm btn-success">Check-in</button>
+          </form>
+          <form method="post" action="{{ url_for('admin.hoat_dong_complete', aid=a.id) }}" style="display:inline">
+            <button class="btn btn-sm btn-primary">Hoàn thành</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Thông báo{% endblock %}
+{% block content %}
+  <h2>Thông báo</h2>
+  <ul class="list-group">
+    {% for n in notices %}
+    <li class="list-group-item">
+      <strong>{{ n.title }}</strong>
+      <div>{{ n.message }}</div>
+      <small>{{ n.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+      {% if not n.is_read %}
+      <form method="post" action="{{ url_for('main.notification_mark_read', nid=n.id) }}" style="display:inline">
+        <button class="btn btn-sm btn-primary">Đánh dấu đã đọc</button>
+      </form>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+

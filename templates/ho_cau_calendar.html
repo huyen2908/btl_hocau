@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Lịch tuần - {{ pond.name }}{% endblock %}
+{% block content %}
+  <h2>Lịch tuần cho {{ pond.name }}</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Giờ \ Ngày</th>
+        {% for d in days %}
+        <th>{{ d.strftime('%a %d-%m') }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for h in hours %}
+      <tr>
+        <td>{{ '%02d:00'|format(h) }}</td>
+        {% for d in days %}
+        {% set b = slots[d].get(h) %}
+        <td>
+          {% if b %}
+            <div class="badge bg-danger">Bận (Đơn #{{ b.id }})</div>
+          {% else %}
+            <div class="text-success">Trống</div>
+          {% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

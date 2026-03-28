@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Hồ sơ{% endblock %}
+{% block content %}
+  <h2>Hồ sơ của tôi</h2>
+  <form method="post">
+    <div class="mb-3"><label>Họ tên</label><input name="full_name" class="form-control" value="{{ current_user.full_name or '' }}" /></div>
+    <div class="mb-3"><label>Email</label><input name="email" class="form-control" value="{{ current_user.email or '' }}" /></div>
+    <div class="mb-3"><label>Phone</label><input name="phone" class="form-control" value="{{ current_user.phone or '' }}" /></div>
+    <button class="btn btn-primary">Lưu</button>
+  </form>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Loại cá{% endblock %}
+{% block content %}
+  <h2>Loại cá</h2>
+  <a class="btn btn-primary mb-3" href="{{ url_for('admin.loai_ca_new') }}">Tạo mới</a>
+  <table class="table">
+    <thead><tr><th>#</th><th>Tên</th><th>Giá</th></tr></thead>
+    <tbody>
+      {% for f in fishes %}
+      <tr>
+        <td>{{ f.id }}</td>
+        <td>{{ f.name }}</td>
+        <td>{{ f.price }}</td>
+        <td>
+          <a class="btn btn-sm btn-primary" href="{{ url_for('admin.loai_ca_edit', fid=f.id) }}">Sửa</a>
+          <form method="post" action="{{ url_for('admin.loai_ca_delete', fid=f.id) }}" style="display:inline" onsubmit="return confirm('Xác nhận xóa?')">
+            <button class="btn btn-sm btn-danger">Xóa</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

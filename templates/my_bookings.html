@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Đặt chỗ của tôi{% endblock %}
+{% block content %}
+  <h2>Đặt chỗ của tôi</h2>
+  <table class="table">
+    <thead><tr><th>#</th><th>Hồ</th><th>Ngày</th><th>Thời gian</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+    <tbody>
+      {% for b in bookings %}
+      <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.ho_cau.name if b.ho_cau else 'N/A' }}</td>
+        <td>{{ b.date }}</td>
+        <td>{{ b.start_time }} - {{ b.end_time }}</td>
+        <td>{{ b.status }}</td>
+        <td>
+          {% if b.status not in ['cancelled','completed'] %}
+          <form method="post" action="{{ url_for('main.my_bookings_cancel', bid=b.id) }}" style="display:inline">
+            <button class="btn btn-sm btn-danger">Hủy</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Đánh giá{% endblock %}
+{% block content %}
+  <h2>Đánh giá</h2>
+  <table class="table">
+    <thead><tr><th>#</th><th>Người dùng</th><th>Hồ</th><th>Điểm</th><th>Nội dung</th><th>Trạng thái</th><th></th></tr></thead>
+    <tbody>
+      {% for r in reviews %}
+      <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.user.username if r.user else 'N/A' }}</td>
+        <td>{{ r.ho_cau.name if r.ho_cau else 'N/A' }}</td>
+        <td>{{ r.rating }}</td>
+        <td>{{ r.content }}</td>
+        <td>{{ 'Đã duyệt' if r.approved else 'Chưa' }}</td>
+        <td>
+          {% if not r.approved %}
+          <form method="post" action="{{ url_for('admin.admin_danh_gia_approve', r_id=r.id) }}">
+            <button class="btn btn-sm btn-success">Duyệt</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

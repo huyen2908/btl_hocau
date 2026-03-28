@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Hoá đơn{% endblock %}
+{% block content %}
+  <h2>Hoá đơn</h2>
+  <table class="table">
+    <thead><tr><th>#</th><th>Người dùng</th><th>Tổng</th><th>Trạng thái</th><th>Ngày</th><th></th></tr></thead>
+    <tbody>
+      {% for i in invoices %}
+      <tr>
+        <td>{{ i.id }}</td>
+        <td>{{ i.user.username if i.user else 'N/A' }}</td>
+        <td>{{ i.total }}</td>
+        <td>{{ i.status }}</td>
+        <td>{{ i.created_at.strftime('%Y-%m-%d') }}</td>
+        <td><a class="btn btn-sm btn-primary" href="{{ url_for('admin.hoa_don_view', inv_id=i.id) }}">Xem</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

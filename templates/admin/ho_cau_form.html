@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Thêm sửa hồ câu{% endblock %}
+{% block content %}
+  <h2>Thêm/Sửa hồ câu</h2>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">{{ form.name.label }} {{ form.name(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.address.label }} {{ form.address(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.district.label }} {{ form.district(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.area.label }} {{ form.area(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.price_per_hour.label }} {{ form.price_per_hour(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.status.label }} {{ form.status(class_='form-control') }}</div>
+    <div class="mb-3">{{ form.description.label }} {{ form.description(class_='form-control') }}</div>
+    {{ form.submit(class_='btn btn-primary') }}
+  </form>
+{% endblock %}

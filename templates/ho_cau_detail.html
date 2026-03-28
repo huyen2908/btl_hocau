@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Chi tiết hồ câu{% endblock %}
+{% block content %}
+  <h2>{{ pond.name }}</h2>
+  <p><strong>Địa chỉ:</strong> {{ pond.address }} - {{ pond.district }}</p>
+  <p>{{ pond.description }}</p>
+  <a class="btn btn-secondary mb-3" href="{{ url_for('main.ho_cau_calendar', pond_id=pond.id) }}">Xem lịch tuần</a>
+
+  <h4>Đặt chỗ</h4>
+  {% if current_user.is_authenticated %}
+    <form method="post" action="{{ url_for('main.dat_cho', pond_id=pond.id) }}">
+      {{ form.hidden_tag() }}
+      <div class="mb-2">{{ form.date.label }} {{ form.date(class_='form-control') }}</div>
+      <div class="mb-2">{{ form.start_time.label }} {{ form.start_time(class_='form-control') }}</div>
+      <div class="mb-2">{{ form.end_time.label }} {{ form.end_time(class_='form-control') }}</div>
+      <div class="mb-2">{{ form.num_people.label }} {{ form.num_people(class_='form-control') }}</div>
+      <div class="mb-2">{{ form.note.label }} {{ form.note(class_='form-control') }}</div>
+      {{ form.submit(class_='btn btn-success') }}
+    </form>
+  {% else %}
+    <p>Vui lòng <a href="{{ url_for('auth.login') }}">đăng nhập</a> để đặt chỗ.</p>
+  {% endif %}
+
+  <hr />
+  <h4>Đánh giá</h4>
+  {% if current_user.is_authenticated %}
+    <form method="post" action="{{ url_for('main.ho_cau_review', pond_id=pond.id) }}">
+      {{ review_form.hidden_tag() }}
+      <div class="mb-2">{{ review_form.rating.label }} {{ review_form.rating(class_='form-select') }}</div>
+      <div class="mb-2">{{ review_form.content.label }} {{ review_form.content(class_='form-control') }}</div>
+      {{ review_form.submit(class_='btn btn-primary') }}
+    </form>
+  {% else %}
+    <p>Vui lòng <a href="{{ url_for('auth.login') }}">đăng nhập</a> để đánh giá.</p>
+  {% endif %}
+
+  <h5 class="mt-3">Nhận xét</h5>
+  <ul class="list-group">
+    {% for r in pond.reviews %}
+      {% if r.approved %}
+      <li class="list-group-item">
+        <strong>{{ r.user.username if r.user else 'Khách' }}</strong> - {{ r.rating }} sao<br>
+        {{ r.content }} <br>
+        <small>{{ r.created_at.strftime('%Y-%m-%d') }}</small>
+      </li>
+      {% endif %}
+    {% else %}
+      <li class="list-group-item">Chưa có đánh giá</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
